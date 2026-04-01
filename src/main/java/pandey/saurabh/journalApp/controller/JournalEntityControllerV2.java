@@ -23,7 +23,8 @@ public class JournalEntityControllerV2 {
 
     @Autowired
     private JournalEntryService journalEntryService;
-    @Autowired private UserService userService;
+    @Autowired
+    private UserService userService;
 
     @GetMapping
     public ResponseEntity<?> getAllJouranlEntriesOfUser(){

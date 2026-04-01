@@ -34,7 +34,10 @@ public class UserScheduler {
         List<User> users =userRepository.getUserForSA();
         for( User user: users){
             List<JournalEntry> journalEntries=user.getJournalEntries();
-            List<String> filteredEntries=journalEntries.stream().filter(x-> x.getDate().isAfter(LocalDateTime.now().minus(7, ChronoUnit.DAYS)).map(x -> x.getContent()).collect(Collectors.toList));
+            List<String> filteredEntries = journalEntries.stream()
+                    .filter(x -> x.getDate().isAfter(LocalDateTime.now().minus(7, ChronoUnit.DAYS)))
+                    .map(x -> x.getContent())
+                    .collect(Collectors.toList());
             String entry=String.join(" ",filteredEntries);
             String sentiment=sentimentAnalysisService.getSentiment(entry);
             emailService.sendEmail(user.getEmail(), "Sentiment for Last 7 days",sentiment);
